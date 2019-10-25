@@ -1,0 +1,40 @@
+body {
+    background-color: rgb(232,232, 232);
+    margin: 0;
+}
+
+.content {
+    margin: 10px 200px;
+}
+
+.top {
+    width: 100%;
+    background-color: #223653;
+    color: white;
+    padding:10px 0px;
+    padding-left: 200px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+h1 {
+    margin: 10px 0px;
+}
+
+.js-plotly-plot {
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    margin-bottom: 20px;
+}
+
+.graphics {
+    margin-top: 20px;
+}
+
+.drpClusters {
+    margin-bottom: 10px !important;
+}
+
+.no-mg-left {
+    margin-left: 0;
+    margin-bottom: 30px;
+}
