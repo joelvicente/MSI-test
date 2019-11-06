@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(232,232, 232);
+    background-color: white;
     margin: 0;
 }
 
@@ -9,7 +9,7 @@ body {
 
 .top {
     width: 100%;
-    background-color: #223653;
+    background-color: rgb(41,166, 191);
     color: white;
     padding:10px 0px;
     padding-left: 200px;
@@ -37,4 +37,142 @@ h1 {
 .no-mg-left {
     margin-left: 0;
     margin-bottom: 30px;
+}
+
+.graph-section {
+    margin: 10px;
+} 
+
+.btnSection {
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+#btnCluster1 {
+    margin-left: 10px;
+}
+
+#btnCluster2 {
+    margin-left: 10px;
+}
+
+#btnCluster3 {
+    margin-left: 10px;
+}
+
+.value-section {
+    margin-top: 120px;
+}
+
+.value-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:20px;
+}
+
+.value {
+    font-weight: 600;
+}
+
+.divider {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(200,200,200);
+    margin: 40px 0px;
+}
+
+/* Link: https://codepen.io/jazzmb/pen/oZgQbp*/
+.top-arrow {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    border: 0.25em solid #333;
+    border-radius: 50%;
+    margin-right: 0.75em;
+  }
+  
+.top-arrow:after {
+    content: '';
+    display: inline-block;
+    margin-top: 0.75em;
+    width: 0.5em;
+    height: 0.5em;
+    border-top: 0.25em solid #333;
+    border-right: 0.25em solid #333;
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+
+.bottom-arrow {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    border: 0.25em solid #333;
+    border-radius: 50%;
+    margin-left: 0.75em;
+}
+  
+.bottom-arrow:after {
+    content: '';
+    display: inline-block;
+    margin-top: 0.6em;
+    width: 0.5em;
+    height: 0.5em;
+    border-top: 0.25em solid #333;
+    border-right: 0.25em solid #333;
+    -moz-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+
+#value-reducers {
+    margin-top: 30px;
+}
+
+.div-arrow {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.a-arrow {
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.value-title {
+    text-transform: uppercase;
+    color: rgb(41,166, 191);
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.greyArea {
+    background-color: rgb(232,232,232);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    line-height: 68px;
+    cursor: pointer;
+}
+
+.imgLogo {
+    vertical-align: middle;
+    width: 36px;
+    height: auto;
+}
+
+.ai-tips {
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
 }

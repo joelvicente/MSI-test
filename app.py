@@ -11,11 +11,14 @@ import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
 import createDataframes as cdf
+import valuesGraphs as vgr
 
 
 ############################################
 # Preparar Dados
 ############################################
+img_logo_base64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADsAAAA5AgMAAAD1g7srAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAxQTFRFAAAALbTLo70x////5QdXfQAAAAF0Uk5TAEDm2GYAAAABYktHRAMRDEzyAAAACXBIWXMAAHUwAAB1MAHdM3LNAAABUUlEQVQoz12TPW7EIBCFB8sjrbaiwH1Ka09BpN2eAnIeK2VOkXKVU+bND7Yxu7L5zADz3gCRtERDW1oZuOJ3aqEQD4x/PrEMnhdoI/NTeNm/pFm3bH2JMlNEfPCAkFmZlr4bI18wF98NX17Sr1F4xoygAri5tmoKw6dzurDOAreDoWG1rj5+wX9EJ25f3xtxdmXgBoaokOcjPgojaBK+IRF1rtC0qYEBmhEd6b7N6rslkuiBlzuQbpSmN6VQzfT0AG8UmZsWJa1mWnh5eh/OtXOyknW3V1mG48FSuypB2AZ8h11cJJ/px4xAbeBlg2Iv7mIvHZfZ7PwmqzSbn7tfA7POOU6cpFaNNUlupckJwIhKMKFaT/bT5qHBOHdeqjH6W5GFTWQWv9FlP2AFTLqpJ1joDu7DEA8hkLsnWOH3+Xy363nPl/tQLhfqep/CcJ2G9g8GHzbv9e02AwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxOS0xMC0yOFQwNTozNjo1OS0wNTowMKN21AwAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTktMTAtMjhUMDU6MzY6NTktMDU6MDDSK2ywAAAAAElFTkSuQmCC'
+
 url = 'https://raw.githubusercontent.com/joelvicenteDimatur/CSV/master/MSI-questionario.csv'
 df_initial = pd.read_csv(url)
 
@@ -148,6 +151,17 @@ fig_customer_window = {
     )
 }
 
+##########
+# Values #
+##########
+
+
+# Strategy Canvas and Customer Window
+df_promote = df_customer_window[(df_customer_window['Media_Q1'] > 0) & (df_customer_window['Media_Q2'] > 0)]
+df_reduce = df_customer_window[(df_customer_window['Media_Q1'] > 0) & (df_customer_window['Media_Q2'] < 0)]
+df_eliminate = df_customer_window[(df_customer_window['Media_Q1'] < 0) & (df_customer_window['Media_Q2'] < 0)]
+df_create = df_customer_window[(df_customer_window['Media_Q1'] < 0) & (df_customer_window['Media_Q2'] > 0)]
+
 
 # ##################################################################################################################################### 
 # -------------------------------------------------------------------------------------------------------------------------------------
@@ -265,9 +279,77 @@ app.layout = html.Div(children=[
                         ])
                     ])
                 ])
-      
             ]),
 
+            dcc.Tab(label='Strategy Canavs', children=[
+                        # Strategy Canvas
+                        html.Div(className="row graph-section", children=[
+                            html.Div(className="six columns", children=[
+                                html.Div(className="btnSection", children=[
+                                    html.Button('Full Dataset', id='btnFullDataset', n_clicks_timestamp=0),
+                                    html.Button('Cluster 1', id='btnCluster1', n_clicks_timestamp=0),
+                                    html.Button('Cluster 2', id='btnCluster2', n_clicks_timestamp=0),
+                                    html.Button('Cluster 3', id='btnCluster3', n_clicks_timestamp=0),
+                                ]),
+                                html.Div([
+                                    dcc.Graph(
+                                        id="scatter_strategy",
+                                        figure = fig_strategy_canvas
+                                )
+                            
+                                ]),
+
+                            ]),
+                            
+                            html.Div(className="three columns", children=[
+                                html.Div(className="value-section", children=[
+                                    html.Div(className="row", children=[
+                                        html.Div(className="div-arrow", children=[
+                                            html.A(className="a-arrow", children=[
+                                                html.Span(className="top-arrow")
+                                            ])
+                                        ]),
+                                        html.Div("Value Boosters", className="value-title"),
+                                        html.Div(className="value-list", children=[
+
+                                            html.Span("Price", className="value"),
+                                            html.Span("Quality", className="value"),
+                                            html.Span("Location", className="value"),
+                                        ])
+                                        
+                                    ]),
+                                    html.Div(className="divider"),
+                                    html.Div([
+                                        html.Div(className="value-list", children=[
+
+                                            html.Span("Accomodation", className="value"),
+                                            html.Span("Wifi", className="value"),
+                                            html.Span("Luxury", className="value"),
+                                        ]),
+                                        html.Div(className="row", id="value-reducers", children=[
+                                            html.Div(className="div-arrow", children=[
+                                                html.A(className="a-arrow", children=[
+                                                    html.Span(className="bottom-arrow")
+                                                ])
+                                            ]),
+                                            html.Div("Value Reducers", className="value-title")
+                                        ])
+                                    ]),
+                                ]),
+                            ]),
+
+                            html.Div(className="three columns ai-tips", children=[
+                                html.Div(className="greyArea", children=[
+                                    html.Img(className="imgLogo", src=img_logo_base64)
+                                ])
+
+                            ])
+
+                        ])
+
+
+
+            ]),
             dcc.Tab(label='Graphs', children=[
                 html.Div([
                     
@@ -344,13 +426,13 @@ app.layout = html.Div(children=[
                     html.Div([
 
                         # Strategy Canvas
-                        html.Div([
-                            dcc.Graph(
-                                id="scatter_strategy",
-                                figure = fig_strategy_canvas
-                            )
-                            
-                        ], className="six columns"),
+                        #html.Div([
+                        #    dcc.Graph(
+                        #        id="scatter_strategy",
+                        #        figure = fig_strategy_canvas
+                        #    )
+                        #    
+                        #], className="six columns"),
 
 
                         # SWOT

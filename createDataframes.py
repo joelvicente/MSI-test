@@ -128,7 +128,8 @@ def CreateDataFrameCustomerWindow(df_q1, df_q2, df_filters, filters):
   
   # DataFrame com os dados necessários para terminar o Profile Matrix
   df_all_calculations = pd.concat([df_profile, df_profile_Q2], axis=1, sort=False)
-  
+  df_all_calculations['Media_Q1'] = df_all_calculations['Media_Q1'] - 3 # Para centralizar os dados
+  df_all_calculations['Media_Q2'] = df_all_calculations['Media_Q2'] - 3
 
 
   return df_all_calculations
